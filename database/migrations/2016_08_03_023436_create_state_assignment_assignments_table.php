@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAssignmentAssignmentsTable extends Migration
+class CreateStateAssignmentAssignmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -28,7 +28,7 @@ class CreateAssignmentAssignmentsTable extends Migration
 
             $table->foreign('assignment_id')
                 ->references('id')
-                ->on('state_assignments')
+                ->on('assignments')
                 ->onDelete('cascade');
 
         });
@@ -42,6 +42,8 @@ class CreateAssignmentAssignmentsTable extends Migration
     public function down()
     {
         //
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::dropIfExists('state_assignment_assignments');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

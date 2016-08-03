@@ -43,6 +43,8 @@ class CreateAssetStatesTable extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('user_roles');
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Schema::dropIfExists('asset_states');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
