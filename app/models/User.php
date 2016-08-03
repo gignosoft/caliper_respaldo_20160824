@@ -36,4 +36,14 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+
+
+    // |users| >- |cities|
+    public function cities()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
+
+
 }
