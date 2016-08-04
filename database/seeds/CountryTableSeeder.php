@@ -5,6 +5,7 @@ use \App\Models\Country;
 use \App\Models\City;
 
 
+
 class CountryTableSeeder extends Seeder
 {
     /**
@@ -21,13 +22,9 @@ class CountryTableSeeder extends Seeder
 
         factory(Country::class, 10)->create()->each(function ($country){
 
-           for($i=0; $i<2; $i++)
-           {
-               $city = factory(City::class)->make();
-               $country->cities()->save($city);
-           }
+            $city = factory(City::class)->make();
+            $country->cities()->save($city);
 
         });
-
     }
 }
