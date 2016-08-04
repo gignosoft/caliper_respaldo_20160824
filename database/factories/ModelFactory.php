@@ -11,11 +11,31 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+
+$factory->define(App\Models\Country::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'name'          => $faker->country,
+        'user_control'  => 'seeder',
+    ];
+});
+
+$factory->define(App\Models\City::class, function (Faker\Generator $faker) {
+    return [
+        'name'          => $faker->city,
+        'user_control'  => 'seeder',
+    ];
+});
+
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
+    return [
+        'identifier'    => $faker->currencyCode,
+        'fist_name'     => $faker->firstName,
+        'last_name'     => $faker->lastName,
+        'user_control'  => 'seeder',
         'email' => $faker->safeEmail,
-        'password' => bcrypt(str_random(10)),
+        'password' => bcrypt('secret'),
         'remember_token' => str_random(10),
     ];
 });
+
+

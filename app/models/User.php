@@ -42,7 +42,7 @@ class User extends Model implements AuthenticatableContract,
     // |users| >- |cities|
     public function cities()
     {
-        return $this->belongsTo(City::class, 'city_id');
+        return $this->belongsTo(City::class);
     }
 
 
