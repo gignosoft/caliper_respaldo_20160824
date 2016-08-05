@@ -35,9 +35,10 @@ class DatabaseSeeder extends Seeder
         $this->call(SupplierTableSeeder::class);
         $this->call(CurrencySupplierTableSeeder::class);
 
+        // |suppliers| >-< |pay_metods|
+        $this->call(PayMetodTableSeeder::class);
+        $this->call(PaySuppliersTableSeeder::class);
 
-        //$this->call(UserRoleTableSeeder::class);
-        // $this->call(CityTableSeeder::class);
 
         Model::reguard();
     }

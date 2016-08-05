@@ -16,4 +16,10 @@ class Supplier extends Model
     {
         return $this->belongsToMany('currencies', 'currency_suppliers', 'supplier_id', 'currency_id');
     }
+
+    // |suppliers| >-< |pay_metods|
+    public function  pay_metods()
+    {
+        return $this->belongsToMany('pay_metods', 'pay_suppliers','supplier_id', 'pay_metod_id');
+    }
 }

@@ -148,9 +148,23 @@ $factory->defineAs(\App\Models\Currency::class,'clp', function (Faker\Generator 
 
 });
 
+// |suppliers| >-< |pay_metods|
+$factory->defineAs(\App\Models\PayMetod::class,'Contado', function (Faker\Generator $faker){
 
+    return [
+        'name'          => 'Contado',
+        'user_control'  => 'seeder',
+    ];
 
+});
+$factory->defineAs(\App\Models\PayMetod::class,'30', function (Faker\Generator $faker){
 
+    return [
+        'name'          => '30 días',
+        'user_control'  => 'seeder',
+    ];
+
+});
 
 
 
