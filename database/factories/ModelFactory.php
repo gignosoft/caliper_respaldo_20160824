@@ -121,5 +121,36 @@ return [
 });
 
 
+// |suppliers| >-< |currencies|
+
+$factory->define(\App\Models\Supplier::class, function (Faker\Generator $faker){
+
+    $max_company_id = \App\models\Company::max('id');
+    $max_id_city    = \App\models\City::max('id');
+
+    return [
+        'company_id'    => rand(1, $max_company_id),
+        'city_id'       => rand(1, $max_id_city),
+        'name'          => $faker->name,
+        'description'   => $faker->paragraph,
+
+        'user_control'  => 'seeder',
+    ];
+
+});
+
+$factory->defineAs(\App\Models\Currency::class,'clp', function (Faker\Generator $faker){
+
+    return [
+        'name'          => 'CLP',
+        'user_control'  => 'seeder',
+    ];
+
+});
+
+
+
+
+
 
 

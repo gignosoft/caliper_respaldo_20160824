@@ -20,7 +20,6 @@ class CreateSuppliersTable extends Migration
             $table->integer('city_id')->unsigned();
             $table->string('name');
             $table->string('description');
-            $table->string('code');
 
             $table->string('user_control');
             $table->timestamps();
