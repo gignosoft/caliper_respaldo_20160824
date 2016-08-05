@@ -43,9 +43,6 @@ $factory->defineAs(App\Models\Role::class, 'visitor', function (Faker\Generator 
 });
 
 
-
-
-
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
 
     $max_id_city = \App\models\City::max('id');
@@ -65,5 +62,64 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'remember_token'    => str_random(10),
     ];
 });
+
+// StateAssetTable
+
+$factory->defineAs(\App\Models\StateAsset::class,'nuevo', function (Faker\Generator $faker){
+
+    return [
+        'name'          => 'nuevo',
+        'user_control'  => 'seeder',
+    ];
+
+});
+
+$factory->defineAs(\App\Models\StateAsset::class,'usado', function (Faker\Generator $faker){
+
+    return [
+        'name'          => 'usado',
+        'user_control'  => 'seeder',
+    ];
+
+});
+
+
+
+/*
+
+| activities | -< | companies |
+
+ */
+// activities
+
+$factory->define(\App\Models\Activity::class, function (Faker\Generator $faker){
+
+    return [
+        'name'          => $faker->word,
+        'user_control'  => 'seeder',
+    ];
+
+});
+
+
+//companies
+$factory->define(App\Models\Company::class, function (Faker\Generator $faker) {
+
+$max_activity_id = \App\models\Activity::max('id');
+
+$simulaRut_1    = strval( rand(71111111, 79999999) );
+$simulaRut_2    = strval( rand(0, 9) );
+$simulaRut      = $simulaRut_1."-".$simulaRut_2;
+
+return [
+    'name'              => $faker->company,
+    'identifier'        => $simulaRut,
+    'activity_id'       => rand(1, $max_activity_id),
+
+    'user_control'      => 'seeder',
+];
+});
+
+
 
 

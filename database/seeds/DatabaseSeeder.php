@@ -21,11 +21,17 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleTableSeeder::class);
         $this->call(UserTableSeeder::class);
         $this->call(UserRoleSeeder::class);
+
+        $this->call(StateAssetTableSeeder::class);
+
+
+        // | activities | -< | companies |
+        $this->call(ActivityTableSeeder::class);
+        $this->call(CompanyTableSeeder::class);
+
+
         //$this->call(UserRoleTableSeeder::class);
-
-
-
-       // $this->call(CityTableSeeder::class);
+        // $this->call(CityTableSeeder::class);
 
         Model::reguard();
     }

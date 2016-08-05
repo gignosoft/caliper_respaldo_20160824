@@ -17,7 +17,7 @@ class UserTableSeeder extends Seeder
          * Técnica hecha debido a que no hay certeza que faker me genere un dato único,
          * por tanto si se cae la base de datos, se atrapa el error.
          */                      
-        $users = factory(User::class, 3)->make();
+        $users = factory(User::class, 10)->make();
         foreach ($users as $user)
         {
             repeat:
