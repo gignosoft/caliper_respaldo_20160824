@@ -44,6 +44,9 @@ class DatabaseSeeder extends Seeder
         $this->call(LevelTableSeeder::class);
         $this->call(PositionTableSeeder::class);
 
+        // | Users | >-< | positions |
+        $this->call(PositionUser_TableSeeder::class);
+
 
         Model::reguard();
     }

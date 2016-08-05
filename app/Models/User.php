@@ -52,4 +52,10 @@ class User extends Model implements AuthenticatableContract,
         return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id');
     }
 
+    // | Users | >-< | positions |
+    public function positions()
+    {
+        return $this->belongsToMany(Position::class, 'position_users', 'position_id', 'user_id' );
+    }
+
 }

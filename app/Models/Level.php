@@ -11,7 +11,6 @@ class Level extends Model
 
 
     // | levels | -< | positions |
-
     public function positions()
     {
         return $this->hasMany(Position::class);
