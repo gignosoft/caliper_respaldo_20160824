@@ -25,7 +25,7 @@ $factory->define(App\Models\City::class, function (Faker\Generator $faker) {
         'user_control'  => 'seeder',
     ];
 });
-/*
+
 $factory->defineAs(App\Models\Role::class, 'admin', function (Faker\Generator $faker) {
 
     return [
@@ -41,15 +41,9 @@ $factory->defineAs(App\Models\Role::class, 'visitor', function (Faker\Generator 
         'user_control'  => 'seeder',
     ];
 });
-*/
 
-$factory->define(App\Models\Role::class, function (Faker\Generator $faker) {
 
-    return [
-        'name'          => 'admin',
-        'user_control'  => 'seeder',
-    ];
-});
+
 
 
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {

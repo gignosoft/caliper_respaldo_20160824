@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use \App\Models\User;
+use \App\Models\Role;
 
 class UserTableSeeder extends Seeder
 {
@@ -15,8 +16,8 @@ class UserTableSeeder extends Seeder
         /*
          * Técnica hecha debido a que no hay certeza que faker me genere un dato único,
          * por tanto si se cae la base de datos, se atrapa el error.
-         */
-        $users = factory(User::class, 100)->make();
+         */                      
+        $users = factory(User::class, 3)->make();
         foreach ($users as $user)
         {
             repeat:
@@ -28,7 +29,7 @@ class UserTableSeeder extends Seeder
                 goto repeat;
             }
         }
-
+    
 
     }
 }

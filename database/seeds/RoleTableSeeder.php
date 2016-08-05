@@ -16,6 +16,11 @@ class RoleTableSeeder extends Seeder
     public function run()
     {
         //
+        factory(Role::class, 'admin')->create();
+        factory(Role::class, 'visitor')->create();
+
+
+        /*
         factory(Role::class, 2)->create()->each(function ($role){
             $users = factory(User::class, 2)->make();
             foreach ($users as $user)
@@ -31,7 +36,7 @@ class RoleTableSeeder extends Seeder
             }
 
         });
-
+*/
 
 
 
