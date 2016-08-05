@@ -12,7 +12,7 @@ class Currency extends Model
     // |suppliers| >-< |currencies|
     public function suppliers()
     {
-        return $this->belongsToMany('suppliers', 'currency_suppliers', 'currency_id', 'supplier_id');
+        return $this->belongsToMany(Supplier::class, 'currency_suppliers', 'currency_id', 'supplier_id');
     }
 
 }

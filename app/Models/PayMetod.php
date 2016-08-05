@@ -13,6 +13,6 @@ class PayMetod extends Model
     // |suppliers| >-< |pay_metods|
     public function  suppliers()
     {
-        return $this->belongsToMany('suppliers', 'pay_suppliers','pay_metod_id', 'supplier_id');
+        return $this->belongsToMany(Supplier::class, 'pay_suppliers','pay_metod_id', 'supplier_id');
     }
 }

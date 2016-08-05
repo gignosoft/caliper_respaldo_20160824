@@ -14,12 +14,12 @@ class Supplier extends Model
     // |suppliers| >-< |currencies|
     public function currencies()
     {
-        return $this->belongsToMany('currencies', 'currency_suppliers', 'supplier_id', 'currency_id');
+        return $this->belongsToMany(Currency::class, 'currency_suppliers', 'supplier_id', 'currency_id');
     }
 
     // |suppliers| >-< |pay_metods|
     public function  pay_metods()
     {
-        return $this->belongsToMany('pay_metods', 'pay_suppliers','supplier_id', 'pay_metod_id');
+        return $this->belongsToMany(PayMetod::class, 'pay_suppliers','supplier_id', 'pay_metod_id');
     }
 }

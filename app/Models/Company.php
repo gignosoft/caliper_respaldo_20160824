@@ -12,7 +12,7 @@ class Company extends Model
     // | activities | -< | companies |
     public function activities()
     {
-        return $this->belongsTo('activities', 'activity_id');
+        return $this->belongsTo(Activity::class, 'activity_id');
     }
 
 }

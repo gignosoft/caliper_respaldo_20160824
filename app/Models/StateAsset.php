@@ -15,6 +15,6 @@ class StateAsset extends Model
     public function assets()
     {
         // | state_assets | >-< | assets |
-        return $this->belongsToMany('assets','state_id','asset_id');
+// pendiente        return $this->belongsToMany(Asse,'state_id','asset_id');
     }
 }

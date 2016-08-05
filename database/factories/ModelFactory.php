@@ -166,5 +166,44 @@ $factory->defineAs(\App\Models\PayMetod::class,'30', function (Faker\Generator $
 
 });
 
+// | levels | -< | positions |
+$factory->defineAs(\App\Models\Level::class,'1', function (Faker\Generator $faker){
+
+    return [
+        'name'          => '1',
+        'user_control'  => 'seeder',
+    ];
+
+});
+$factory->defineAs(\App\Models\Level::class,'2', function (Faker\Generator $faker){
+
+    return [
+        'name'          => '2',
+        'user_control'  => 'seeder',
+    ];
+
+});
+$factory->defineAs(\App\Models\Level::class,'3', function (Faker\Generator $faker){
+
+    return [
+        'name'          => '3',
+        'user_control'  => 'seeder',
+    ];
+
+});
+
+$factory->define(\App\Models\Position::class, function (Faker\Generator $faker){
+
+    $max_level_id = \App\models\Level::max('id');
+
+    return [
+        'name'          => $faker->jobTitle,
+        'level_id'      => rand(1, $max_level_id),
+
+        'user_control'  => 'seeder',
+    ];
+
+});
+
 
 

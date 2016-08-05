@@ -40,6 +40,11 @@ class DatabaseSeeder extends Seeder
         $this->call(PaySuppliersTableSeeder::class);
 
 
+        // | levels | -< | positions |
+        $this->call(LevelTableSeeder::class);
+        $this->call(PositionTableSeeder::class);
+
+
         Model::reguard();
     }
 }
