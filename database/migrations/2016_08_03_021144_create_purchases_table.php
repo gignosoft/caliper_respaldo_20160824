@@ -30,10 +30,7 @@ class CreatePurchasesTable extends Migration
                 ->references('id')
                 ->on('assets')
                 ->onDelete('cascade');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+
 
         });
     }

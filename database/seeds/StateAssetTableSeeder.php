@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use App\Models\StateAsset;
+
 class StateAssetTableSeeder extends Seeder
 {
     /**
@@ -12,5 +14,7 @@ class StateAssetTableSeeder extends Seeder
     public function run()
     {
         //
+        factory(StateAsset::class, 'nuevo')->create();
+        factory(StateAsset::class, 'usado')->create();
     }
 }

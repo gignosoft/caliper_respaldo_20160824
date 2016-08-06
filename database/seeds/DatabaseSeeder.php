@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserTableSeeder::class);
         $this->call(UserRoleSeeder::class);
 
-        $this->call(StateAssetTableSeeder::class);
+        
 
 
         // | activities | -< | companies |
@@ -46,6 +46,11 @@ class DatabaseSeeder extends Seeder
 
         // | Users | >-< | positions |
         $this->call(PositionUser_TableSeeder::class);
+
+        // |state_assignments| >-< |assignments|
+        $this->call(StateAssetTableSeeder::class);
+        $this->call(AssetTableSeeder::class);
+        $this->call(AssignmentTableSeeder::class);
 
 
         Model::reguard();

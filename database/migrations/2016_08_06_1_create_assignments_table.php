@@ -16,8 +16,10 @@ class CreateAssignmentsTable extends Migration
         Schema::create('assignments', function (Blueprint $table){
 
             $table->increments('id');
+            $table->string('name');
+
             $table->integer('user_id')->unsigned();
-            $table->string('description');
+            $table->integer('asset_id')->unsigned();
 
             $table->string('user_control');
             $table->timestamps();
@@ -25,6 +27,11 @@ class CreateAssignmentsTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('asset_id')
+                ->references('id')
+                ->on('assets')
                 ->onDelete('cascade');
 
         });

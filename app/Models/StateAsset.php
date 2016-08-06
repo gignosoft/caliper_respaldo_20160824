@@ -11,10 +11,9 @@ class StateAsset extends Model
     protected $table = 'state_assets';
 
 
-
+    // | state_assets | >- | assets |
     public function assets()
-    {
-        // | state_assets | >-< | assets |
-// pendiente        return $this->belongsToMany(Asse,'state_id','asset_id');
+    {        
+        return $this->hasMany(Asset::class, 'asset_id');
     }
 }

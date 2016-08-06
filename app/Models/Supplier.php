@@ -22,4 +22,12 @@ class Supplier extends Model
     {
         return $this->belongsToMany(PayMetod::class, 'pay_suppliers','supplier_id', 'pay_metod_id');
     }
+
+    // | suppliers | -< | assets |
+    public function assets()
+    {
+        return $this->belongsTo(Asset::class, 'supplier_id');
+    }
+
+
 }

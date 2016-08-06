@@ -63,33 +63,8 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-// StateAssetTable
-
-$factory->defineAs(\App\Models\StateAsset::class,'nuevo', function (Faker\Generator $faker){
-
-    return [
-        'name'          => 'nuevo',
-        'user_control'  => 'seeder',
-    ];
-
-});
-
-$factory->defineAs(\App\Models\StateAsset::class,'usado', function (Faker\Generator $faker){
-
-    return [
-        'name'          => 'usado',
-        'user_control'  => 'seeder',
-    ];
-
-});
 
 
-
-/*
-
-| activities | -< | companies |
-
- */
 // activities
 
 $factory->define(\App\Models\Activity::class, function (Faker\Generator $faker){
@@ -206,4 +181,98 @@ $factory->define(\App\Models\Position::class, function (Faker\Generator $faker){
 });
 
 
+
+// StateAssetTable
+
+$factory->defineAs(\App\Models\StateAsset::class,'nuevo', function (Faker\Generator $faker){
+
+    return [
+        'name'          => 'nuevo',
+        'user_control'  => 'seeder',
+    ];
+
+});
+
+$factory->defineAs(\App\Models\StateAsset::class,'usado', function (Faker\Generator $faker){
+
+    return [
+        'name'          => 'usado',
+        'user_control'  => 'seeder',
+    ];
+
+});
+
+// AssetTableSeeder
+$factory->define(\App\Models\Asset::class, function (Faker\Generator $faker){
+
+    $max_supplier_id     = \App\models\Supplier::max('id');
+    $max_state_asset_id = \App\models\StateAsset::max('id');
+
+    return [
+        'name'              => $faker->domainName,
+        'description'       => $faker->paragraph,
+        'code'              => $faker->postcode,
+        'supplier_id'       => rand(1, $max_supplier_id),
+        'state_asset_id'    => rand(1, $max_state_asset_id),
+        'available'         => 1,
+
+        'user_control'  => 'seeder',
+    ];
+
+});
+
+
+// |state_assignments| >-< |assignments|
+
+$factory->define(\App\Models\Assignment::class, function (Faker\Generator $faker){ // no deben ser mas assignaciones que assets
+
+    $max_user_id = \App\models\User::max('id');
+    $max_asset_id = \App\models\Asset::max('id');
+    
+    $arr_state_assignments = [
+        '0' => 'En prestamo',
+        '1' => 'Entregado',
+        '2' => 'En mantención',
+        '3' => 'Perdido',
+    ];
+
+
+    $index = rand(0,3);
+
+    // se verifica que esté disponible antes de un prestamo.
+    $asset_id = 0;
+    $assets      = \App\Models\Asset::where('available', '=', '1')->take(1) ->get();
+
+    foreach($assets as $asset)
+    {
+        if(!is_null($asset->id))
+        {
+            $asset_id   = $asset->id;
+        }else{
+            dd('no deben ser mas assignaciones que assets');
+        }
+    }
+
+    // si el estado no es entregado, se indica que el asset no està disponible.
+    $asset2= \App\Models\Asset::find($asset_id);
+    if($index != 1)
+     {
+         $asset2->available = 0;
+     }else{
+         $asset2->available = 1;
+     }
+    $asset2->save();
+
+
+    return [
+        'user_id'   => rand(1, $max_user_id),
+        'asset_id'  => $asset_id,
+        'name'      => $arr_state_assignments[$index],
+
+        'user_control'  => 'seeder',
+    ];
+
+
+
+});
 

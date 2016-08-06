@@ -21,6 +21,7 @@ class CreateAssetsTable extends Migration
             $table->string('code');
             $table->integer('supplier_id')->unsigned();
             $table->integer('state_asset_id')->unsigned();
+            $table->boolean('available')->default(1);
 
             $table->string('user_control');
             $table->timestamps();
@@ -34,6 +35,8 @@ class CreateAssetsTable extends Migration
                 ->references('id')
                 ->on('state_assets')
                 ->onDelete('cascade');
+
+
 
         });
     }
