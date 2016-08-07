@@ -47,11 +47,25 @@ class DatabaseSeeder extends Seeder
         // | Users | >-< | positions |
         $this->call(PositionUser_TableSeeder::class);
 
+
+
+        $this->call(purchasesTableSeeder::class);
+
+
         // |state_assignments| >-< |assignments|
         $this->call(StateAssetTableSeeder::class);
         $this->call(AssetTableSeeder::class);
-        $this->call(AssignmentTableSeeder::class);
 
+
+        $this->call(StateAssignmentTableSeeder::class);
+        $this->call(AssignmentTableSeeder::class);
+        $this->call(StateAssignment_AssignmentTableSeeder::class);
+
+        $this->call(OfficesTableSeeder::class);
+
+        $this->call(DepartmentTableSeeder::class);
+
+        $this->call(Department_usersTableSeeder::class);
 
         Model::reguard();
     }

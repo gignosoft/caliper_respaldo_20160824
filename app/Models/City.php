@@ -24,4 +24,11 @@ class City extends Model
         return $this->$this->hasMany(User::class, 'city_id');
     }
 
+    // | offices | >- | cities |
+    public function offices()
+    {
+        return $this->hasMany(Office::class, 'city_id');
+    }
+    
+
 }

@@ -205,8 +205,9 @@ $factory->defineAs(\App\Models\StateAsset::class,'usado', function (Faker\Genera
 // AssetTableSeeder
 $factory->define(\App\Models\Asset::class, function (Faker\Generator $faker){
 
-    $max_supplier_id     = \App\models\Supplier::max('id');
-    $max_state_asset_id = \App\models\StateAsset::max('id');
+    $max_supplier_id        = \App\models\Supplier::max('id');
+    $max_purchases_asset_id = \App\models\Purchase::max('id');
+    $max_state_asset_id     = \App\models\StateAsset::max('id');
 
     return [
         'name'              => $faker->domainName,
@@ -214,7 +215,8 @@ $factory->define(\App\Models\Asset::class, function (Faker\Generator $faker){
         'code'              => $faker->postcode,
         'supplier_id'       => rand(1, $max_supplier_id),
         'state_asset_id'    => rand(1, $max_state_asset_id),
-        'available'         => 1,
+        'purchase_id'       => rand(1, $max_purchases_asset_id),
+        'available'         => rand(0,1),
 
         'user_control'  => 'seeder',
     ];
@@ -222,26 +224,56 @@ $factory->define(\App\Models\Asset::class, function (Faker\Generator $faker){
 });
 
 
+
+//StateAssignment
+
+$factory->defineAs(\App\Models\StateAssignment::class,'prestamo', function (Faker\Generator $faker){
+    return [
+        'name'          => 'En prestamo',
+        'user_control'  => 'seeder',
+    ];
+});
+
+$factory->defineAs(\App\Models\StateAssignment::class,'entregado', function (Faker\Generator $faker){
+    return [
+        'name'          => 'Entregado',
+        'user_control'  => 'seeder',
+    ];
+});
+
+$factory->defineAs(\App\Models\StateAssignment::class,'mantencion', function (Faker\Generator $faker){
+    return [
+        'name'          => 'En mantención',
+        'user_control'  => 'seeder',
+    ];
+});
+
+$factory->defineAs(\App\Models\StateAssignment::class,'perdido', function (Faker\Generator $faker){
+    return [
+        'name'          => 'Perdido',
+        'user_control'  => 'seeder',
+    ];
+});
+
+
+
+
 // |state_assignments| >-< |assignments|
 
 $factory->define(\App\Models\Assignment::class, function (Faker\Generator $faker){ // no deben ser mas assignaciones que assets
 
+    $aux_prueba_id = 0;
+    repeat:
+
     $max_user_id = \App\models\User::max('id');
-    $max_asset_id = \App\models\Asset::max('id');
-    
-    $arr_state_assignments = [
-        '0' => 'En prestamo',
-        '1' => 'Entregado',
-        '2' => 'En mantención',
-        '3' => 'Perdido',
-    ];
+    $asset_id       = 1;
 
+    $assets         = \App\Models\Asset::whereRaw('available = ? AND id > ?' ,
+                        [
+                            '0',
+                            $aux_prueba_id,
+                        ])->take(1) ->get();
 
-    $index = rand(0,3);
-
-    // se verifica que esté disponible antes de un prestamo.
-    $asset_id = 0;
-    $assets      = \App\Models\Asset::where('available', '=', '1')->take(1) ->get();
 
     foreach($assets as $asset)
     {
@@ -252,27 +284,74 @@ $factory->define(\App\Models\Assignment::class, function (Faker\Generator $faker
             dd('no deben ser mas assignaciones que assets');
         }
     }
+    $pruebas = \App\Pruebas\PruebaLlenadoAsignaciones::where('asset_id', '=', $asset_id)->take(1) ->get();
 
-    // si el estado no es entregado, se indica que el asset no està disponible.
-    $asset2= \App\Models\Asset::find($asset_id);
-    if($index != 1)
-     {
-         $asset2->available = 0;
-     }else{
-         $asset2->available = 1;
-     }
-    $asset2->save();
+    foreach($pruebas as $prueba)
+    {
+        $aux_prueba_id =  $prueba->asset_id;
+        goto repeat;
+    }
 
+    \App\Pruebas\PruebaLlenadoAsignaciones::create([
+        'asset_id' => $asset_id,
+    ]);
 
     return [
-        'user_id'   => rand(1, $max_user_id),
-        'asset_id'  => $asset_id,
-        'name'      => $arr_state_assignments[$index],
+        'user_id'       => rand(1, $max_user_id),
+        'asset_id'      => $asset_id,
+        'description'   => $faker->paragraph,
 
         'user_control'  => 'seeder',
     ];
 
+});
 
+//offices
+$factory->define(\App\Models\Office::class, function (Faker\Generator $faker){
+    $max_cities_id     = \App\models\City::max('id');
+
+    return [
+        'name'          => $faker->address,
+        'description'   => $faker->paragraph,
+        'city_id'       => rand(1, $max_cities_id),
+        'user_control'  => 'seeder',
+    ];
+});
+
+
+// departments
+$factory->define(\App\Models\Department::class, function (Faker\Generator $faker){
+    $max_offices_id     = \App\models\Office::max('id');
+
+    return [
+        'name'              => $faker->firstNameFemale,
+        'office_id'         => rand(1, $max_offices_id),
+        'user_control'      => 'seeder',
+    ];
+});
+
+// purchases
+$factory->define(\App\Models\Purchase::class, function (Faker\Generator $faker){
+
+    $unit_price = rand(1111,9999);
+    return [
+        'date'              => $faker->dateTime,
+        'quantity'          => 1,
+        'unit_price'        => $unit_price,
+        'total'             => $unit_price,
+       
+        'user_control'  => 'seeder',
+    ];
 
 });
+
+
+
+
+
+
+
+
+
+
 

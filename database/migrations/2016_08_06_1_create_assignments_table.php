@@ -16,7 +16,7 @@ class CreateAssignmentsTable extends Migration
         Schema::create('assignments', function (Blueprint $table){
 
             $table->increments('id');
-            $table->string('name');
+            $table->string('description');
 
             $table->integer('user_id')->unsigned();
             $table->integer('asset_id')->unsigned();

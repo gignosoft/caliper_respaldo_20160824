@@ -21,6 +21,7 @@ class CreateAssetsTable extends Migration
             $table->string('code');
             $table->integer('supplier_id')->unsigned();
             $table->integer('state_asset_id')->unsigned();
+            $table->integer('purchase_id')->unsigned();
             $table->boolean('available')->default(1);
 
             $table->string('user_control');
@@ -36,6 +37,10 @@ class CreateAssetsTable extends Migration
                 ->on('state_assets')
                 ->onDelete('cascade');
 
+            $table->foreign('purchase_id')
+                ->references('id')
+                ->on('purchases')
+                ->onDelete('cascade');
 
 
         });

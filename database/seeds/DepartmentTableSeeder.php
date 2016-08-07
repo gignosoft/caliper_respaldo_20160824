@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Assignment;
+use App\Models\Department;
 
-class AssignmentTableSeeder extends Seeder
+class DepartmentTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class AssignmentTableSeeder extends Seeder
     public function run()
     {
         //
-        factory(Assignment::class,10)->create();
+        factory(Department::class,20)->create();
     }
 }

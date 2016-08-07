@@ -16,8 +16,6 @@ class CreatePurchasesTable extends Migration
         Schema::create('purchases', function(Blueprint $table){
 
             $table->increments('id');
-            $table->integer('asset_id')->unsigned();
-            $table->integer('user_id')->unsigned();
             $table->dateTime('date');
             $table->integer('quantity');
             $table->double('unit_price');
@@ -25,11 +23,6 @@ class CreatePurchasesTable extends Migration
 
             $table->string('user_control');
             $table->timestamps();
-
-            $table->foreign('asset_id')
-                ->references('id')
-                ->on('assets')
-                ->onDelete('cascade');
 
 
         });

@@ -26,6 +26,11 @@ class Asset extends Model
     {
         return $this->belongsTo(Supplier::class);
     }
-    
+
+    // | purchases | -< | assets |
+    public function assets()
+    {
+        return $this->belongsTo(Purchase::class);
+    }
     
 }

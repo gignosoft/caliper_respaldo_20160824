@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOfficesTable extends Migration
+class PruebaLlenadoDeAssignacion extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,12 @@ class CreateOfficesTable extends Migration
     public function up()
     {
         //
-        Schema::create('offices',function(Blueprint $table){
+        Schema::create('prueba_llenado_de_asignacion', function (Blueprint $table){
 
             $table->increments('id');
-            $table->string('name');
-            $table->string('description');
-            $table->integer('city_id')->unsigned();
+            $table->integer('asset_id');
 
-            $table->string('user_control');
             $table->timestamps();
-
-            $table->foreign('city_id')
-                ->references('id')
-                ->on('cities')
-                ->onDelete('cascade');
-
         });
     }
 
@@ -39,8 +30,9 @@ class CreateOfficesTable extends Migration
     public function down()
     {
         //
+        //
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Schema::dropIfExists('offices');
+        Schema::dropIfExists('prueba_llenado_de_asignacion');
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

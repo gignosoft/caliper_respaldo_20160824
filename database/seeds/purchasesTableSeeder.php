@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Assignment;
+use App\Models\Purchase;
 
-class AssignmentTableSeeder extends Seeder
+class purchasesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class AssignmentTableSeeder extends Seeder
     public function run()
     {
         //
-        factory(Assignment::class,10)->create();
+        factory(Purchase::class,20)->create();
     }
 }
