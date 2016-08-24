@@ -11,6 +11,21 @@
 |
 */
 
+
+/*
+ * Rutas para desarrollo
+ */
+
+
+
+
+
+/*
+ * Rutas Oficiales
+ */
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
